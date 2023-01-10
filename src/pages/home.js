@@ -1,5 +1,12 @@
 import React from "react";
+import Issue from "../components/issue";
+import IssuesList from "../components/issues-list";
 
 export default function Home() {
-    return <main>Home Component</main>
+  return (
+    <div>
+      <Issue />
+      <IssuesList />
+    </div>
+  );
 }
