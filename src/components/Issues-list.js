@@ -1,23 +1,36 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
 import Issue from "./issue";
 import Loading from "./loading";
-import { useGlobalContext } from "../context";
+import { AppContext } from "../context";
+import './issues-list.css'
 
-export default function IssuesList() {
-  const { issues, loading } = useGlobalContext;
-  if (loading) {
-    return <Loading/>;
-  }
-//   if (issues.length < 1) {
-//     return (
-//         <h2>No issues in this repo</h2>
-//     )
-//   }
+function IssuesList() {
+  const { issues, loading } = useContext(AppContext);
+
   return (
-      <div>
-        {/* {issues.map((item) => {
-          return <Issue key={item.id} {...item} />;
-        })} */}
-      </div>
+    <div >
+      {issues?.length < 1 && <h5>No issues in this repo</h5>}
+      {loading && <Loading />}
+      {!loading && (
+        <div  className="main-list">
+          {issues?.map((item) => {
+            const { id, title, labels, assignees, comments, created_at } = item;
+            return (
+              <Issue
+                id={id}
+                key={id}
+                title={title}
+                labels={labels}
+                assignees={assignees}
+                comments={comments}
+                created_at={created_at}
+              />
+            );
+          })}
+        </div>
+      )}
+    </div>
   );
 }
+
+export default IssuesList;

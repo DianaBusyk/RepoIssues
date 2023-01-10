@@ -5,7 +5,6 @@ import IssuesList from "../components/issues-list";
 export default function Home() {
   return (
     <div>
-      <Issue />
       <IssuesList />
     </div>
   );
