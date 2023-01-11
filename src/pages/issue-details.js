@@ -3,7 +3,7 @@ import React from "react";
 export default function IssueDetails() {
   return (
     <section>
-      <h1>IssueDetails</h1>
+      <h1>Issue Details</h1>
     </section>
   );
 }

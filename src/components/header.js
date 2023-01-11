@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import './header.css'
+import SearchForm from "./search-form";
+import { AppContext } from "../context";
+import "./header.css";
 
-const Header = () =>  {
+const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -27,25 +29,11 @@ const Header = () =>  {
               </Link>
             </li>
           </ul>
-          <form className="d-flex">
-            <input
-              className="form-control me-sm-2"
-              type="search"
-              placeholder="username"
-            />
-            <input
-              className="form-control me-sm-2"
-              type="search"
-              placeholder="repo"
-            />
-            <button className="btn btn-secondary my-2 my-sm-0" type="submit">
-              search
-            </button>
-          </form>
+          <SearchForm />
         </div>
       </div>
     </nav>
   );
-}
+};
 
 export default Header;

@@ -1,4 +1,5 @@
-import React, { useContext, useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { getRepoIssues } from "./api/api";
 
 const AppContext = React.createContext();
 
@@ -8,43 +9,20 @@ const AppProvider = ({ children }) => {
   const [repo, setRepo] = useState("create-react-app");
   const [issues, setIssues] = React.useState([]);
 
-  const getRepoIssues = `https://api.github.com/repos/${username}/${repo}/issues`;
-
-  const fetchIssues = useCallback(async () => {
+  const getIssues = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${getRepoIssues}`);
-      const data = await response.json();
-      console.log(data);
-      
-      if (data) {
-        const newIssues = data.map((item) => {
-          const { id, title, labels, assignees, comments, created_at } = item;
-
-          return {
-            id,
-            title,
-            labels,
-            assignees,
-            comments,
-            created_at,
-          };
-        });
-
-        setIssues(newIssues);
-      } else {
-        setIssues([]);
-      }
-      setLoading(false);
+      const data = await getRepoIssues(username, repo);
+      data ? setIssues(data) : setIssues([]);
     } catch (error) {
-      setLoading(false);
       console.log(error);
     }
+    setLoading(false);
   }, [username, repo]);
 
   useEffect(() => {
-    fetchIssues();
-  }, [username, repo, fetchIssues]);
+    getIssues();
+  }, [username, repo]);
 
   return (
     <AppContext.Provider
@@ -60,10 +38,6 @@ const AppProvider = ({ children }) => {
       {children}
     </AppContext.Provider>
   );
-};
-
-export const useGlobalContext = () => {
-  return useContext(AppContext);
 };
 
 export { AppContext, AppProvider };
