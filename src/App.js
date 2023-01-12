@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import pages
-import Home from './pages/home';
-import IssueDetails from './pages/issue-details';
-import Users from './pages/users';
-import About from './pages/about';
-import Error from './pages/error';
+import Home from './pages/home/home';
+import IssueDetails from './pages/issueDetails/issue-details';
+import Users from './pages/users/users';
+import About from './pages/about/about';
+import Error from './pages/error/error';
 // import components
-import Header from './components/header';
+import Header from './components/header/header';
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import Issue from "./issue";
-import Loading from "./loading";
-import { AppContext } from "../context";
+import Issue from "../issue/issue";
+import Loading from "../loading/loading";
+import { AppContext } from "../../context";
 import './issues-list.css'
 
 function IssuesList() {
@@ -18,7 +18,7 @@ function IssuesList() {
       {!loading && (
         <div  className="main-list">
           { issues.length > 0 ? issues.map((item) => {
-            const { id, title, labels, assignees, comments, created_at } = item;
+            const { id, title, labels, assignees, comments, created_at,number } = item;
             return (
               <Issue
                 id={id}
@@ -28,6 +28,7 @@ function IssuesList() {
                 assignees={assignees}
                 comments={comments}
                 created_at={created_at}
+                number={number}
               />
             );
           }) : <h5>No issues in this repo</h5> }

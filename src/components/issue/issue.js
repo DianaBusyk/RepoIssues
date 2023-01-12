@@ -1,10 +1,11 @@
-import React from "react";
+import React,{useContext} from "react";
 import "./issue.css";
 import { Link } from 'react-router-dom';
 import dayjs from "dayjs";
+import { AppContext } from "../../context";
 
-export default function Issue({id, title, labels, assignees, comments, created_at }) {
-  
+export default function Issue({id, title, labels, assignees, comments, created_at, number }) {
+  const {setIssueNum} = useContext(AppContext);
   return (
       <div className="card border-secondary mb-3">
         <div className="card-header">Created: {dayjs(created_at).format("DD MMM YYYY | HH:mm")} </div>
@@ -23,7 +24,7 @@ export default function Issue({id, title, labels, assignees, comments, created_a
           <p className="card-text">
             comments: {comments}
           </p>
-          <Link to={`/issue/${id}`}>
+          <Link to={`/issue/${id}`} onClick = {()=> setIssueNum(number)} >
           Read details
         </Link>
         </div>
