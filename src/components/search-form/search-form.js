@@ -1,17 +1,29 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../context";
-
-
+import { getRepoIssues } from "../../api/api";
 
 const SearchForm = () => {
-  const { setUsername, setRepo} = useContext(AppContext);
-  const [inputUsername, setInputUsername] = useState('');
-  const [inputRepo, setInputRepo] = useState('');
+  const [inputUsername, setInputUsername] = useState("facebook");
+  const [inputRepo, setInputRepo] = useState("create-react-app");
+
+  const {
+    username,
+    repo,
+    setUsername,
+    setRepo,
+    setLoading,
+    setShownIssues,
+    setRepoLabels,
+    setRepoAssignees,
+    getFilteredIssues
+  } = useContext(AppContext);
 
   const handleSubmit = () => {
+    setLoading(true);
     setUsername(inputUsername);
     setRepo(inputRepo);
-  }
+    getFilteredIssues(inputUsername,inputRepo)
+  };
 
   return (
     <div className="d-flex">

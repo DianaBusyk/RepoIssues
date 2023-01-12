@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SearchForm from "../searchForm/search-form";
+import SearchForm from "../search-form/search-form";
 import "./header.css";
 
 const Header = () => {
